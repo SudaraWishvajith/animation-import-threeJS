@@ -1,10 +1,6 @@
-# r3f-vite-starter
-A boilerplate to build R3F projects
-
+threeJS animation configurator
 ```
 yarn
 yarn dev
 ```
-
-
-![image](https://user-images.githubusercontent.com/6551176/221732091-23ee52cb-4150-42fa-b998-43628d7a6b0d.png)
+<img width="1437" alt="Screenshot 2023-07-23 at 20 39 29" src="https://github.com/SudaraWishvajith/animation-import-threeJS/assets/93005479/2aac8613-91bf-4b2e-8f79-93ed91a2e79b">
