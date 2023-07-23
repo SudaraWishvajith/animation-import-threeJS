@@ -5,20 +5,29 @@ Command: npx gltfjsx@6.2.10 public/models/greetings.glb
 
 import React, { useEffect, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
+import { useCharacterAnimations } from '../context/CharacterAnimations'
 
 const Greetings = (props) => {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('./models/greetings.glb')
+  const { setAnimations, animationIndex } = useCharacterAnimations();
   const { actions, names } = useAnimations(animations, group)
   console.log(names);
 
   useEffect(() => {
-    actions[names[1]].fadeIn(0.001).play();
-  },[]);
+    setAnimations(names)
+  }, [names]);
+
+  useEffect(() => {
+    actions[names[animationIndex]].reset().fadeIn(0.05).play();
+    return () => {
+      actions[names[animationIndex]].fadeOut(0.5);
+    }
+  },[animationIndex]);
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
-        <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.007}>
+        <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.005}>
           <primitive object={nodes.mixamorigHips} />
           <skinnedMesh castShadow name="Body" geometry={nodes.Body.geometry} material={materials.Bodymat} skeleton={nodes.Body.skeleton} />
           <skinnedMesh castShadow name="Bottoms" geometry={nodes.Bottoms.geometry} material={materials.Bottommat} skeleton={nodes.Bottoms.skeleton} />
